@@ -3,7 +3,7 @@
 //  Copyright © 2022 Argent Labs Limited. All rights reserved.
 //
 import Foundation
-import Logging
+//import Logging
 import secp256k1
 import web3
 import XMTPRust
