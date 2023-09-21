@@ -64,6 +64,20 @@
 			_ = await client.registerInstallation(request: request)
 		}
 
+        public func registerFcm(token: String) async throws {
+            if pushServer == "" {
+                throw XMTPPushError.noPushServer
+            }
+            let request = Notifications_V1_RegisterInstallationRequest.with { request in
+                request.installationID = installationID
+                request.deliveryMechanism = Notifications_V1_DeliveryMechanism.with { delivery in
+                    delivery.firebaseDeviceToken = token
+                    delivery.deliveryMechanismType = .firebaseDeviceToken(token)
+                }
+            }
+            _ = await client.registerInstallation(request: request)
+        }
+
 		public func subscribe(topics: [String]) async throws {
 			if pushServer == "" {
 				throw XMTPPushError.noPushServer
